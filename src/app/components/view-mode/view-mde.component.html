@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <button mat-button routerLink="/view-mode" routerLinkActive="active-link">
+    View Mode
+  </button>
+  <button mat-button routerLink="/settings" routerLinkActive="active-link">
+    Settings
+  </button>
+</mat-toolbar>
+
+<div *ngIf="(charts$ | async)?.length > 0">
+  <mat-form-field>
+    <mat-label>Date Range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date" />
+      <input matEndDate placeholder="End date" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</div>
+
+<app-chart-list [charts]="charts$ | async"></app-chart-list>

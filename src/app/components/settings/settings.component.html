@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <button mat-button routerLink="/view-mode" routerLinkActive="active-link">
+    View Mode
+  </button>
+  <button mat-button routerLink="/settings" routerLinkActive="active-link">
+    Settings
+  </button>
+</mat-toolbar>
+
+<app-chart-list
+  [charts]="charts$ | async"
+  (edit)="openEditModal($event)"
+  (delete)="deleteChart($event)"
+></app-chart-list>
+
+<button mat-fab color="primary" (click)="openAddModal()">+</button>

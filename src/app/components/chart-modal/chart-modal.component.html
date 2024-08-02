@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{ data.isNew ? "Add New Chart" : "Edit Chart" }}</h2>
+
+<form [formGroup]="chartForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Chart Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="chartForm.controls.name.hasError('required')">
+      Chart name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Chart Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let type of chartTypes" [value]="type">{{
+        type
+      }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="chartForm.controls.type.hasError('required')">
+      Chart type is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Chart Color</mat-label>
+    <input matInput formControlName="color" type="color" />
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-button type="submit" [disabled]="chartForm.invalid">
+      {{ data.isNew ? "Add" : "Save" }}
+    </button>
+  </div>
+</form>
